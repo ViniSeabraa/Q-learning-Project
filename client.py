@@ -39,8 +39,9 @@ def update_q_value(q_table, current_state, action_index, reward, next_state, lea
     max_future_q = np.max(q_table[next_state])
     old_q = q_table[current_state, action_index]
     new_q = (1 - learning_rate) * old_q + learning_rate * (reward + discount_factor * max_future_q)
-    q_table[current_state, action_index] = new_q
     print(f"Updated Q-value for state {current_state}, action {action_index}: {new_q}")
+    q_table[current_state, action_index] = new_q
+    
 
 def extract_state_details(state):
     platform = int(state[2:7], 2)
@@ -52,9 +53,9 @@ def main():
     q_table_shape = (24 * 4, 3)
     file_path = 'resultado.txt'
 
-    learning_rate = 0.2
+    learning_rate = 0.3
     discount_factor = 0.95
-    exploration_rate = 0.1
+    exploration_rate = 0
 
     actions = ["left", "right", "jump"]
     action_map = {action: idx for idx, action in enumerate(actions)}
